@@ -42,7 +42,7 @@ paths:
                 properties:
                   status:
                     type: string
-                    example: "Forbidden"
+                    example: "Error"
                   error:
                     type: string
                     example: "You don't have permission to update profile."
@@ -54,30 +54,9 @@ paths:
                 properties:
                   status:
                     type: string
-                    example: "Incorrect data"
-                  errors:
-                    type: object
-                    properties:
-                      firstname:
-                        type: array
-                        items:
-                          type: string
-                          example: "First name is too long"
-                      login:
-                        type: array
-                        items:
-                          type: string
-                          example: "Login is too long"
-                      bio:
-                        type: array
-                        items:
-                          type: string
-                          example: "Bio is too long"
-                      birthDate:
-                        type: array
-                        items:
-                          type: string
-                          example: "Birth date format is incorrect"
+                    example: "Error"
+                  error:
+                    $ref: "#/components/schemas/Error"
     # put profile
     put:
       summary: "Заменяет пользовательский профиль с указанным идентификатором на другой."
@@ -112,7 +91,7 @@ paths:
                 properties:
                   status:
                     type: string
-                    example: "Forbidden"
+                    example: "Error"
                   error:
                     type: string
                     example: "You don't have permission to update profile."
@@ -125,29 +104,8 @@ paths:
                   status:
                     type: string
                     example: "Incorrect data"
-                  errors:
-                    type: object
-                    properties:
-                      firstname:
-                        type: array
-                        items:
-                          type: string
-                          example: "First name is too long"
-                      login:
-                        type: array
-                        items:
-                          type: string
-                          example: "Login is too long"
-                      bio:
-                        type: array
-                        items:
-                          type: string
-                          example: "Bio is too long"
-                      birthDate:
-                        type: array
-                        items:
-                          type: string
-                          example: "Birth date format is incorrect"
+                  error:
+                    $ref: "#/components/schemas/Error"
     # delete profile
     delete:
       summary: "Удаляет пользовательский профиль с указанным идентификатором."
@@ -176,7 +134,7 @@ paths:
                 properties:
                   status:
                     type: string
-                    example: "Not found"
+                    example: "Error"
                   error:
                     type: string
                     example: "Profile with id 1 doesn't exist"
@@ -188,10 +146,9 @@ paths:
                 properties:
                   status:
                     type: string
-                    example: "Forbidden"
+                    example: "Error"
                   error:
-                    type: string
-                    example: "You don't have permission to remove profile."
+                    $ref: "#/components/schemas/Error"
     get:
       summary: "Возвращает пользовательский профиль по указанному идентификатору."
       #description: "Возвращает пользовательский профиль по указанному идентификатору."
@@ -217,10 +174,9 @@ paths:
                 properties:
                   status:
                     type: string
-                    example: "Not found"
+                    example: "Error"
                   error:
-                    type: string
-                    example: "Profile with id 1 doesn't exist"
+                    $ref: "#/components/schemas/Error"
         '403':
           description: "Нет прав на получение данных."
           content:
@@ -229,10 +185,9 @@ paths:
                 properties:
                   status:
                     type: string
-                    example: "Forbidden"
+                    example: "Error"
                   error:
-                    type: string
-                    example: "You don't have permission to get this data"
+                    $ref: "#/components/schemas/Error"
   # post profile                
   /api/profiles/:
     post:
@@ -267,10 +222,9 @@ paths:
                 properties:
                   status:
                     type: string
-                    example: "Forbidden"
+                    example: "Error"
                   error:
-                    type: string
-                    example: "You don't have permission to add new profile."
+                    $ref: "#/components/schemas/Error"
         '422':
           description: "Одно или более из параметров профиля имеют недопустимое значение."
           content:
@@ -279,35 +233,23 @@ paths:
                 properties:
                   status:
                     type: string
-                    example: "Incorrect data"
-                  errors:
-                    type: object
-                    properties:
-                      firstname:
-                        type: array
-                        items:
-                          type: string
-                          example: "First name is too long"
-                      login:
-                        type: array
-                        items:
-                          type: string
-                          example: "Login is too long"
-                      bio:
-                        type: array
-                        items:
-                          type: string
-                          example: "Bio is too long"
-                      birthDate:
-                        type: array
-                        items:
-                          type: string
-                          example: "Birth date format is incorrect"
+                    example: "Error"
+                  error:
+                    $ref: "#/components/schemas/Error"
 
 
 
 components:
   schemas:
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+          example: 422
+        message:
+          type: string
+          example: "Incorrect input data"
     Profile:
       type: object
       properties:
