@@ -237,6 +237,9 @@ paths:
                   error:
                     $ref: "#/components/schemas/Error"
 
+  /api/shops:
+
+
 
 
 components:
@@ -253,6 +256,9 @@ components:
     Profile:
       type: object
       properties:
+        id:
+          type: integer
+          example: 1
         firstname:
           type: string
           example: "Andrew"
@@ -265,4 +271,18 @@ components:
         birthDate:
           type: string
           format: date-time          
-          example: "01-01-1970"                 
+          example: "01-01-1970"   
+
+    Shop:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        location:
+          type: string
+          example: "Pokrovsky b-d, 11"
+        name:
+          type: string
+          example: "Pear-6"
+          
