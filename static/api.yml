@@ -1,0 +1,49 @@
+openapi: '3.0.2'
+info:
+  title: MIR Dating API
+  version: '0.1.0'
+servers:
+  - url: https://api.mdatingservice.ru/
+paths:
+  /api/profiles/{profile-id}:
+    get:
+      responses:
+        '200':
+          description: OK
+  /api/profiles/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                name:
+                  type: string
+                  example: "Andrew"
+                login:
+                  type: string
+                  example: "andrew216"
+                bio:
+                  type: string
+                  example: "I'm very positive and sexual."
+                birthDate:
+                  type: string
+                  format: date-time          
+                  example: "01-01-2001"    
+      responses:
+        '200':
+          description: При успешном добавлении нового профиля возвращается присвоенный профилю идентификатор
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    type: string
+                    example: "OK"
+                  data:
+                    type: object
+                    properties:
+                      userId:
+                        type: integer
+                        example: 8
+                    
