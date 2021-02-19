@@ -4,6 +4,7 @@ info:
   version: 'indev'
 servers:
   - url: localhost:5000
+
 paths:
   # get/put/patch/delete profile
   /api/profiles/{profileId}:
@@ -18,24 +19,11 @@ paths:
           required: true
           description: "Целое положительное число - идентификатор профиля."
       requestBody:
-        required: false
+        required: true
         content:
           application/json:
             schema:
-              properties:
-                firstname:
-                  type: string
-                  example: "Andrew"
-                login:
-                  type: string
-                  example: "dh872jka"
-                bio:
-                  type: string
-                  example: "skip me please"
-                birthDate:
-                  type: string
-                  format: date-time          
-                  example: "01-01-1970"
+              $ref: "#/components/schemas/Profile"
       responses:
         '200':
           description: "При успешном обновлении профиля возвращается статус ОК"
@@ -105,20 +93,7 @@ paths:
         content:
           application/json:
             schema:
-              properties:
-                firstname:
-                  type: string
-                  example: "Andrew"
-                login:
-                  type: string
-                  example: "andrew216"
-                bio:
-                  type: string
-                  example: "I'm very positive and sexual."
-                birthDate:
-                  type: string
-                  format: date-time          
-                  example: "01-01-2001" 
+              $ref: "#/components/schemas/Profile"
       responses:
         '200':
           description: "При успешном обновлении профиля возвращается статус ОК"
@@ -233,23 +208,7 @@ paths:
           content:
             application/json:
               schema:
-                properties:
-                  id:
-                    type: integer
-                    example: 1
-                  firstname:
-                    type: string
-                    example: "Andrew"
-                  login:
-                    type: string
-                    example: "andrew216"
-                  bio:
-                    type: string
-                    example: "I'm very positive and sexual."
-                  birthDate:
-                    type: string
-                    format: date-time          
-                    example: "01-01-2001"  
+                $ref: "#/components/schemas/Profile"
         '404':
           description: "Профиль с указанным идентификатором не найден."
           content:
@@ -283,20 +242,7 @@ paths:
         content:
           application/json:
             schema:
-              properties:
-                firstname:
-                  type: string
-                  example: "Andrew"
-                login:
-                  type: string
-                  example: "andrew216"
-                bio:
-                  type: string
-                  example: "I'm very positive and sexual."
-                birthDate:
-                  type: string
-                  format: date-time          
-                  example: "01-01-2001"    
+              $ref: "#/components/schemas/Profile"   
       responses:
         '200':
           description: "При успешном добавлении нового профиля возвращается присвоенный профилю идентификатор"
@@ -360,4 +306,21 @@ paths:
 
 
 
-                    
+components:
+  schemas:
+    Profile:
+      type: object
+      properties:
+        firstname:
+          type: string
+          example: "Andrew"
+        login:
+          type: string
+          example: "dh872jka"
+        bio:
+          type: string
+          example: "skip me please"
+        birthDate:
+          type: string
+          format: date-time          
+          example: "01-01-1970"                 
