@@ -1,23 +1,290 @@
 openapi: '3.0.2'
 info:
   title: MIR Dating API
-  version: '0.1.0'
+  version: 'indev'
 servers:
   - url: localhost:5000
 paths:
-  /api/profiles/{profile-id}:
-    get:
-      responses:
-        '200':
-          description: OK
-  /api/profiles/:
-    post:
+  # get/put/patch/delete profile
+  /api/profiles/{profileId}:
+    # patch profile
+    patch:
+      summary: "Заменяет указанные параметры пользовательского профиля с указанным идентификатором."
+      parameters:
+        - in: path
+          name: profileId
+          schema:
+            type: integer
+          required: true
+          description: "Целое положительное число - идентификатор профиля."
       requestBody:
+        required: false
         content:
           application/json:
             schema:
               properties:
-                name:
+                firstname:
+                  type: string
+                  example: "Andrew"
+                login:
+                  type: string
+                  example: "dh872jka"
+                bio:
+                  type: string
+                  example: "skip me please"
+                birthDate:
+                  type: string
+                  format: date-time          
+                  example: "01-01-1970"
+      responses:
+        '200':
+          description: "При успешном обновлении профиля возвращается статус ОК"
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    type: string
+                    example: "OK"
+        '403':
+          description: "Нет прав на совершение операции."
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    type: string
+                    example: "Forbidden"
+                  error:
+                    type: string
+                    example: "You don't have permission to update profile."
+        '422':
+          description: "Одно или более из параметров профиля имеют недопустимое значение."
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    type: string
+                    example: "Incorrect data"
+                  errors:
+                    type: object
+                    properties:
+                      firstname:
+                        type: array
+                        items:
+                          type: string
+                          example: "First name is too long"
+                      login:
+                        type: array
+                        items:
+                          type: string
+                          example: "Login is too long"
+                      bio:
+                        type: array
+                        items:
+                          type: string
+                          example: "Bio is too long"
+                      birthDate:
+                        type: array
+                        items:
+                          type: string
+                          example: "Birth date format is incorrect"
+    # put profile
+    put:
+      summary: "Заменяет пользовательский профиль с указанным идентификатором на другой."
+      parameters:
+        - in: path
+          name: profileId
+          schema:
+            type: integer
+          required: true
+          description: "Целое положительное число - идентификатор профиля."
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                firstname:
+                  type: string
+                  example: "Andrew"
+                login:
+                  type: string
+                  example: "andrew216"
+                bio:
+                  type: string
+                  example: "I'm very positive and sexual."
+                birthDate:
+                  type: string
+                  format: date-time          
+                  example: "01-01-2001" 
+      responses:
+        '200':
+          description: "При успешном обновлении профиля возвращается статус ОК"
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    type: string
+                    example: "OK"
+        '403':
+          description: "Нет прав на совершение операции."
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    type: string
+                    example: "Forbidden"
+                  error:
+                    type: string
+                    example: "You don't have permission to update profile."
+        '422':
+          description: "Одно или более из параметров профиля имеют недопустимое значение."
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    type: string
+                    example: "Incorrect data"
+                  errors:
+                    type: object
+                    properties:
+                      firstname:
+                        type: array
+                        items:
+                          type: string
+                          example: "First name is too long"
+                      login:
+                        type: array
+                        items:
+                          type: string
+                          example: "Login is too long"
+                      bio:
+                        type: array
+                        items:
+                          type: string
+                          example: "Bio is too long"
+                      birthDate:
+                        type: array
+                        items:
+                          type: string
+                          example: "Birth date format is incorrect"
+    # delete profile
+    delete:
+      summary: "Удаляет пользовательский профиль с указанным идентификатором."
+      parameters:
+        - in: path
+          name: profileId
+          schema:
+            type: integer
+          required: true
+          description: "Целое положительное число - идентификатор профиля."
+      responses:
+        '200':
+          description: "Сообщение об успешном удалении профиля."
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    type: string
+                    example: "OK" 
+        '404':
+          description: "Профиль с указанным идентификатором не найден."
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    type: string
+                    example: "Not found"
+                  error:
+                    type: string
+                    example: "Profile with id 1 doesn't exist"
+        '403':
+          description: "Нет прав на совершение операции."
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    type: string
+                    example: "Forbidden"
+                  error:
+                    type: string
+                    example: "You don't have permission to remove profile."
+    get:
+      summary: "Возвращает пользовательский профиль по указанному идентификатору."
+      #description: "Возвращает пользовательский профиль по указанному идентификатору."
+      parameters:
+        - in: path
+          name: profileId
+          schema:
+            type: integer
+          required: true
+          description: "Целое положительное число - идентификатор профиля."
+      responses:
+        '200':
+          description: "Профиль пользователя в формате JSON."
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                  firstname:
+                    type: string
+                    example: "Andrew"
+                  login:
+                    type: string
+                    example: "andrew216"
+                  bio:
+                    type: string
+                    example: "I'm very positive and sexual."
+                  birthDate:
+                    type: string
+                    format: date-time          
+                    example: "01-01-2001"  
+        '404':
+          description: "Профиль с указанным идентификатором не найден."
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    type: string
+                    example: "Not found"
+                  error:
+                    type: string
+                    example: "Profile with id 1 doesn't exist"
+        '403':
+          description: "Нет прав на получение данных."
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    type: string
+                    example: "Forbidden"
+                  error:
+                    type: string
+                    example: "You don't have permission to get this data"
+  # post profile                
+  /api/profiles/:
+    post:
+      summary: "Добавляет в систему новый профиль и возвращает присвоенный ему идентификатор."
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                firstname:
                   type: string
                   example: "Andrew"
                 login:
@@ -32,7 +299,7 @@ paths:
                   example: "01-01-2001"    
       responses:
         '200':
-          description: При успешном добавлении нового профиля возвращается присвоенный профилю идентификатор
+          description: "При успешном добавлении нового профиля возвращается присвоенный профилю идентификатор"
           content:
             application/json:
               schema:
@@ -46,4 +313,51 @@ paths:
                       userId:
                         type: integer
                         example: 8
+        '403':
+          description: "Нет прав на совершение операции."
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    type: string
+                    example: "Forbidden"
+                  error:
+                    type: string
+                    example: "You don't have permission to add new profile."
+        '422':
+          description: "Одно или более из параметров профиля имеют недопустимое значение."
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    type: string
+                    example: "Incorrect data"
+                  errors:
+                    type: object
+                    properties:
+                      firstname:
+                        type: array
+                        items:
+                          type: string
+                          example: "First name is too long"
+                      login:
+                        type: array
+                        items:
+                          type: string
+                          example: "Login is too long"
+                      bio:
+                        type: array
+                        items:
+                          type: string
+                          example: "Bio is too long"
+                      birthDate:
+                        type: array
+                        items:
+                          type: string
+                          example: "Birth date format is incorrect"
+
+
+
                     
