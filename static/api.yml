@@ -3,7 +3,7 @@ info:
   title: MIR Dating API
   version: '0.1.0'
 servers:
-  - url: https://api.mdatingservice.ru/
+  - url: localhost:5000
 paths:
   /api/profiles/{profile-id}:
     get:
