@@ -7,7 +7,7 @@ app = Flask(__name__)
 app.config['TEMPLATES_AUTO_RELOAD'] = True
 
 SWAGGER_URL = '/docs'
-API_URL = '/static/api.yml'
+API_URL = '/static/api/api.yml'
 swaggerui_blueprint = get_swaggerui_blueprint(SWAGGER_URL, API_URL, config={'app_name': 'API docs'})
 app.register_blueprint(swaggerui_blueprint, url_prefix=SWAGGER_URL)
 

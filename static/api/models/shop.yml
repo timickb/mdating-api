@@ -1,0 +1,19 @@
+components:
+  schemas:
+    Shop:
+      type: object
+      properties:
+        version:
+          type: integer
+          example: 1
+          description: "Данная величина используется для предотвращения конфликтов 
+          при одновреенных запросах и инкрементируется после каждой модификации"
+        id:
+          type: integer
+          example: 1
+        location:
+          type: string
+          example: "Russia"
+        name:
+          type: string
+          example: "Sample cafe"

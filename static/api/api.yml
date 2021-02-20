@@ -11,7 +11,7 @@ paths:
       summary: "Возвращает информацию о магазине по указанному идентификатору."
       parameters: [ $ref: "#/components/parameters/ShopId" ]
       responses:
-        '200':
+        200:
           description: "Информация о магазине в формате JSON."
           content:
             application/json:
@@ -22,15 +22,15 @@ paths:
                     example: "OK"
                   data:
                     $ref: "#/components/schemas/Shop"
-        '404':
-          $ref: "#/components/responses/404"
-        '403':
-          $ref: "#/components/responses/403"
+        404:
+          $ref: "./responses.yml#/components/responses/404"
+        403:
+          $ref: "./responses.yml#/components/responses/403"
     delete:
       summary: "Удаляет магазин с указанным идентификатором"
       parameters: [ $ref: "#/components/parameters/ShopId" ]
       responses:
-        '200':
+        200:
           description: "Информация о магазине в формате JSON."
           content:
             application/json:
@@ -39,10 +39,10 @@ paths:
                   status:
                     type: string
                     example: "OK"
-        '404':
-          $ref: "#/components/responses/404"
-        '403':
-          $ref: "#/components/responses/403"
+        404:
+          $ref: "./responses.yml#/components/responses/404"
+        403:
+          $ref: "./responses.yml#/components/responses/403"
     put:
       summary: "Заменяет объект магазина с указанным идентификатором на другой объект"
       parameters: [ $ref: "#/components/parameters/ShopId" ]
@@ -51,9 +51,9 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Profile"
+              $ref: "./models/profile.yml#/components/schemas/Shop"
       responses:
-        '200':
+        200:
           description: "При успешном обновлении магазина возвращается статус ОК"
           content:
             application/json:
@@ -62,10 +62,10 @@ paths:
                   status:
                     type: string
                     example: "OK"
-        '403':
-          $ref: "#/components/responses/403"
-        '422':
-          $ref: "#/components/responses/422"
+        403:
+          $ref: "./responses.yml#/components/responses/403"
+        422:
+          $ref: "./responses.yml#/components/responses/422"
     patch:
       summary: "Заменяет некоторые параметры магазина с указанным идентификатором"
       parameters: [ $ref: "#/components/parameters/ShopId" ]
@@ -74,9 +74,9 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Profile"
+              $ref: "./models/shop.yml#/components/schemas/Shop"
       responses:
-        '200':
+        200:
           description: "При успешном обновлении параметров возвращается статус ОК"
           content:
             application/json:
@@ -85,10 +85,10 @@ paths:
                   status:
                     type: string
                     example: "OK"
-        '403':
-          $ref: "#/components/responses/403"
-        '422':
-          $ref: "#/components/responses/422"
+        403:
+          $ref: "./responses.yml#/components/responses/403"
+        422:
+          $ref: "./responses.yml#/components/responses/422"
 
   /api/shops/:
     post:
@@ -98,9 +98,9 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Shop"
+              $ref: "./models/shop.yml#/components/schemas/Shop"
       responses:
-        '200':
+        200:
           description: "При успешном добавлении магазина возвращается статус ОК"
           content:
             application/json:
@@ -110,11 +110,11 @@ paths:
                     type: string
                     example: "OK"
                   data:
-                    $ref: "#/components/schemas/Shop"
-        '403':
-          $ref: "#/components/responses/403"
-        '422':
-          $ref: "#/components/responses/422"
+                    $ref: "./models/shop.yml#/components/schemas/Shop"
+        403:
+          $ref: "./responses.yml#/components/responses/403"
+        422:
+          $ref: "./responses.yml#/components/responses/422"
 
   # get/put/patch/delete profile
   /api/profiles/{profileId}:
@@ -127,9 +127,9 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Profile"
+              $ref: "./models/profile.yml#/components/schemas/Profile"
       responses:
-        '200':
+        200:
           description: "При успешном обновлении профиля возвращается статус ОК"
           content:
             application/json:
@@ -138,10 +138,10 @@ paths:
                   status:
                     type: string
                     example: "OK"
-        '403':
-          $ref: "#/components/responses/403"
-        '422':
-          $ref: "#/components/responses/422"
+        403:
+          $ref: "./responses.yml#/components/responses/403"
+        422:
+          $ref: "./responses.yml#/components/responses/422"
     # put profile
     put:
       summary: "Заменяет пользовательский профиль с указанным идентификатором на другой."
@@ -151,9 +151,9 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Profile"
+              $ref: "./models/profile.yml#/components/schemas/Profile"
       responses:
-        '200':
+        200:
           description: "При успешном обновлении профиля возвращается статус ОК"
           content:
             application/json:
@@ -162,16 +162,16 @@ paths:
                   status:
                     type: string
                     example: "OK"
-        '403':
-          $ref: "#/components/responses/403"
-        '422':
-          $ref: "#/components/responses/422"
+        403:
+          $ref: "./responses.yml#/components/responses/403"
+        422:
+          $ref: "./responses.yml#/components/responses/422"
     # delete profile
     delete:
       summary: "Удаляет пользовательский профиль с указанным идентификатором."
       parameters: [ $ref: "#/components/parameters/ProfileId" ]
       responses:
-        '200':
+        200:
           description: "Сообщение об успешном удалении профиля."
           content:
             application/json:
@@ -180,25 +180,25 @@ paths:
                   status:
                     type: string
                     example: "OK" 
-        '404':
-          $ref: "#/components/responses/404"
-        '403':
-          $ref: "#/components/responses/403"
+        404:
+          $ref: "./responses.yml#/components/responses/404"
+        403:
+          $ref: "./responses.yml#/components/responses/403"
     get:
       summary: "Возвращает пользовательский профиль по указанному идентификатору."
       #description: "Возвращает пользовательский профиль по указанному идентификатору."
       parameters: [ $ref: "#/components/parameters/ProfileId" ]
       responses:
-        '200':
+        200:
           description: "Профиль пользователя в формате JSON."
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Profile"
-        '404':
-          $ref: "#/components/responses/404"
-        '403':
-          $ref: "#/components/responses/403"
+                $ref: "./models/profile.yml#/components/schemas/Profile"
+        404:
+          $ref: "./responses.yml#/components/responses/404"
+        403:
+          $ref: "./responses.yml#/components/responses/403"
   # post profile                
   /api/profiles/:
     post:
@@ -208,9 +208,9 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Profile"   
+              $ref: "./models/profile.yml#/components/schemas/Profile"   
       responses:
-        '200':
+        200:
           description: "При успешном добавлении нового профиля возвращается назад его содержимое с присовенным идентификатором"
           content:
             application/json:
@@ -220,64 +220,15 @@ paths:
                     type: string
                     example: "OK"
                   data:
-                    type: object
-                    properties:
-                      profile:
-                        $ref: "#/components/schemas/Profile"
-        '403':
-          $ref: "#/components/responses/403"
-        '422':
-          $ref: "#/components/responses/422"
+                    $ref: "./models/profile.yml#/components/schemas/Profile"
+        403:
+          $ref: "./responses.yml#/components/responses/403"
+        422:
+          $ref: "./responses.yml#/components/responses/422"
 
 
 
 components:
-  responses:
-    '403':
-      description: "Нет прав на совершение операции."
-      content:
-        application/json:
-          schema:
-            properties:
-              status:
-                type: string
-                example: "Error"
-              error:
-                $ref: "#/components/schemas/Error"
-    '404':
-      description: "Профиль с указанным идентификатором не найден."
-      content:
-        application/json:
-          schema:
-            properties:
-              status:
-                type: string
-                example: "Error"
-              error:
-                $ref: "#/components/schemas/Error"
-    '409':
-      description: "Произошел конфликт: одновременно кто-то другой совершал операцию с данным объектом"
-      content:
-        application/json:
-          schema:
-            properties:
-              status:
-                type: string
-                example: "Error"
-              error:
-                $ref: "#/components/schemas/Error"
-    '422':
-      description: "Одно или более из параметров профиля имеют недопустимое значение."
-      content:
-        application/json:
-          schema:
-            properties:
-              status:
-                type: string
-                example: "Error"
-              error:
-                $ref: "#/components/schemas/Error"
-
   parameters:
     ProfileId:
       in: path
@@ -293,73 +244,7 @@ components:
         type: integer
       required: true
       description: "Целое положительное число - идентификатор магазина."
-  schemas:
-    Error:
-      type: object
-      properties:
-        code:
-          type: integer
-          example: 422
-        message:
-          type: string
-          example: "Incorrect input data"
-    Profile:
-      type: object
-      properties:
-        version:
-          type: integer
-          example: 1
-          description: "Данная величина используется для предотвращения конфликтов 
-          при одновреенных запросах и инкрементируется после каждой модификации"
-        id:
-          type: integer
-          example: 1
-        firstname:
-          type: string
-          example: "Andrew"
-        login:
-          type: string
-          example: "dh872jka"
-        bio:
-          type: string
-          example: "skip me please"
-        birthDate:
-          type: string
-          format: date-time          
-          example: "01-01-1970"   
-
-    Shop:
-      type: object
-      properties:
-        version:
-          type: integer
-          example: 1
-          description: "Данная величина используется для предотвращения конфликтов 
-          при одновреенных запросах и инкрементируется после каждой модификации"
-        id:
-          type: integer
-          example: 1
-        location:
-          type: string
-          example: "Russia"
-        name:
-          type: string
-          example: "Sample cafe"
+  
     
-    Transaction:
-      type: object
-      properties:
-        id:
-          type: integer
-          example: 1
-        userId:
-          type: integer
-          example: 1
-        shopId:
-          type: integer
-          example: 1
-        date:
-          type: string
-          format: date-time
-          example: "2021-02-19 20:40 GMT+3"
+    
           

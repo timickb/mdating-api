@@ -1,0 +1,58 @@
+components:
+  responses:
+    '200':
+      description: "Операция успешно выполнена."
+      content:
+        application/json:
+          schema:
+            properties:
+              status:
+                type: string
+                example: "OK"
+              data:
+                type: object
+    '403':
+      description: "Нет прав на совершение операции."
+      content:
+        application/json:
+          schema:
+            properties:
+              status:
+                type: string
+                example: "Error"
+              error:
+                $ref: "./models/error.yml#/components/schemas/Error"
+  
+    '404':
+      description: "Профиль с указанным идентификатором не найден."
+      content:
+        application/json:
+          schema:
+            properties:
+              status:
+                type: string
+                example: "Error"
+              error:
+                $ref: "./models/error.yml#/components/schemas/Error"
+    '409':
+      description: "Произошел конфликт: одновременно кто-то другой совершал операцию с данным объектом"
+      content:
+        application/json:
+          schema:
+            properties:
+              status:
+                type: string
+                example: "Error"
+              error:
+                $ref: "./models/error.yml#/components/schemas/Error"
+    '422':
+      description: "Одно или более из параметров профиля имеют недопустимое значение."
+      content:
+        application/json:
+          schema:
+            properties:
+              status:
+                type: string
+                example: "Error"
+              error:
+                $ref: "./models/error.yml#/components/schemas/Error"

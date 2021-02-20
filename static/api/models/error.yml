@@ -1,0 +1,12 @@
+components:
+  schemas:
+    schemas:
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+          example: 422
+        message:
+          type: string
+          example: "Incorrect input data"   

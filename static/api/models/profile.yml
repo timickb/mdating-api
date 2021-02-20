@@ -1,0 +1,26 @@
+components:
+  schemas:
+    Profile:
+      type: object
+      properties:
+        version:
+          type: integer
+          example: 1
+          description: "Данная величина используется для предотвращения конфликтов 
+          при одновреенных запросах и инкрементируется после каждой модификации"
+        id:
+          type: integer
+          example: 1
+        firstname:
+          type: string
+          example: "Andrew"
+        login:
+          type: string
+          example: "dh872jka"
+        bio:
+          type: string
+          example: "skip me please"
+        birthDate:
+          type: string
+          format: date-time          
+          example: "01-01-1970"
